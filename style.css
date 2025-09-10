@@ -1,13 +1,17 @@
-body {
+html, body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* 🚫 No scrollbars */
   background: black;
+  font-family: Arial, sans-serif;
   color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+}
+
+#menu {
+  margin-top: 20px;
+  text-align: center;
 }
 
 h1 {
@@ -54,18 +58,31 @@ button.selected {
 #gameCanvas {
   display: none;
   background: black;
-  margin-top: 20px;
   border: 2px solid white;
+}
+
+/* Scoreboard */
+#scoreboard {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  color: white;
+  text-shadow: 0 0 5px black, 0 0 10px black;
+  z-index: 10;
+  display: none; /* hidden until game starts */
 }
 
 /* === MOBILE D-PAD === */
 #dpad {
   display: none; /* hidden on desktop */
-  position: fixed;
-  bottom: 30px;
+  position: absolute;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
+  z-index: 20;
 }
 
 #dpad button {
@@ -96,5 +113,10 @@ button.selected {
 @media (max-width: 768px) {
   #dpad {
     display: block;
+  }
+  #dpad button {
+    width: 55px;
+    height: 55px;
+    font-size: 22px;
   }
 }
