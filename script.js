@@ -65,6 +65,7 @@ function startGame() {
 
   document.addEventListener("keydown", direction);
   addSwipeControls();
+  addButtonControls();
 
   gameLoop();
 }
@@ -95,6 +96,13 @@ function addSwipeControls() {
       else if (dySwipe < -30 && dy === 0) { dx = 0; dy = -box; }
     }
   });
+}
+
+function addButtonControls() {
+  document.getElementById("btn-up").addEventListener("click", () => { if (dy === 0) { dx = 0; dy = -box; } });
+  document.getElementById("btn-down").addEventListener("click", () => { if (dy === 0) { dx = 0; dy = box; } });
+  document.getElementById("btn-left").addEventListener("click", () => { if (dx === 0) { dx = -box; dy = 0; } });
+  document.getElementById("btn-right").addEventListener("click", () => { if (dx === 0) { dx = box; dy = 0; } });
 }
 
 function draw() {

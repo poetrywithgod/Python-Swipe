@@ -38,7 +38,7 @@ button:hover {
   box-shadow: 0 0 15px rgba(255,255,255,0.7);
 }
 
-/* Active/click effect */
+/* Active effect */
 button:active {
   transform: scale(0.95);
   box-shadow: 0 0 5px rgba(255,255,255,0.7);
@@ -52,8 +52,43 @@ button.selected {
 }
 
 #gameCanvas {
-  display: none; /* hidden until game starts */
+  display: none;
   background: black;
   margin-top: 20px;
   border: 2px solid white;
+}
+
+/* On-screen controls */
+#controls {
+  display: none; /* hidden by default (desktop) */
+  margin-top: 20px;
+  text-align: center;
+}
+
+#controls button {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  border-radius: 50%;
+  background: #444;
+  color: white;
+  margin: 5px;
+}
+
+#controls button:hover {
+  transform: scale(1.1);
+  background: #666;
+}
+
+#controls .row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Show controls only on small devices */
+@media (max-width: 768px) {
+  #controls {
+    display: block;
+  }
 }
