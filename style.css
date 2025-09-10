@@ -12,19 +12,42 @@ html,body {
 }
 
 /* groups */
-.menu-row { display:flex; gap:20px; justify-content:center; flex-wrap:wrap; align-items:flex-start; }
-.menu-group { min-width:150px; }
+.menu-row { 
+  display:flex; 
+  gap:20px; 
+  justify-content:center; 
+  flex-wrap:wrap; 
+  align-items:flex-start; 
+}
+.menu-group { 
+  min-width:150px; 
+}
 
-h1 { margin: 8px 0 14px 0; font-size:22px; text-shadow:0 0 6px #0f0; }
+h1 { 
+  margin: 8px 0 14px 0; 
+  font-size:22px; 
+  text-shadow:0 0 6px #0f0; 
+}
 
 /* buttons */
 button {
-  background:#444; border:none; color:#fff;
-  padding:10px 14px; margin:6px; border-radius:10px;
-  cursor:pointer; font-weight:700; transition: transform .14s ease, box-shadow .14s ease;
+  background:#444; 
+  border:none; 
+  color:#fff;
+  padding:10px 14px; 
+  margin:6px; 
+  border-radius:10px;
+  cursor:pointer; 
+  font-weight:700; 
+  transition: transform .14s ease, box-shadow .14s ease;
 }
-button:hover { transform:translateY(-3px) scale(1.03); box-shadow:0 6px 16px rgba(255,255,255,0.06); }
-button:active { transform: scale(.97); }
+button:hover { 
+  transform:translateY(-3px) scale(1.03); 
+  box-shadow:0 6px 16px rgba(255,255,255,0.06); 
+}
+button:active { 
+  transform: scale(.97); 
+}
 
 /* selected look */
 button.selected {
@@ -34,50 +57,95 @@ button.selected {
 }
 
 /* hint text */
-.hint { font-size:13px; opacity:.9; margin-top:8px; }
+.hint { 
+  font-size:13px; 
+  opacity:.9; 
+  margin-top:8px; 
+}
 
 /* canvas */
 #gameCanvas {
-  display:block;
-  width:100vw; height:calc(100vh - 120px); /* leave room for menu / scoreboard */
-  max-width:100%; max-height:100%;
-  background:#000; margin:0 auto;
+  display:none; /* Hidden until game starts */
+  width:100vw; 
+  height:calc(100vh - 120px); /* leave room for menu / scoreboard */
+  max-width:100%; 
+  max-height:100%;
+  background:#000; 
+  margin:0 auto;
   border: 2px solid rgba(255,255,255,0.08);
 }
 
 /* scoreboard - floating top center */
 #scoreboard {
-  position: absolute; top: 10px; left: 50%;
-  transform: translateX(-50%); z-index: 100;
-  background: rgba(0,0,0,0.35); padding:8px 12px; border-radius:8px;
-  font-family: "Courier New", monospace; font-weight:700;
+  position: absolute; 
+  top: 10px; 
+  left: 50%;
+  transform: translateX(-50%); 
+  z-index: 100;
+  background: rgba(0,0,0,0.35); 
+  padding:8px 12px; 
+  border-radius:8px;
+  font-family: "Courier New", monospace; 
+  font-weight:700;
   display:none; /* show only during game */
   backdrop-filter: blur(4px);
 }
 
 /* D-PAD (mobile) */
 #dpad {
-  position: absolute; bottom: 18px; left: 50%;
+  position: absolute; 
+  bottom: 18px; 
+  left: 50%;
   transform: translateX(-50%);
-  z-index: 200; text-align:center;
+  z-index: 200; 
+  text-align:center;
   display:none; /* shown by media query */
 }
-.dpad-row { display:flex; gap:10px; justify-content:center; align-items:center; margin-top:6px; }
-.dpad-btn {
-  width:64px; height:64px; border-radius:50%;
-  background: rgba(50,50,50,0.7); color:white; border:1px solid rgba(255,255,255,0.12);
-  font-size:22px; box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+.dpad-row { 
+  display:flex; 
+  gap:10px; 
+  justify-content:center; 
+  align-items:center; 
+  margin-top:6px; 
 }
-.dpad-btn:active { background:#a8ff4c; color:#052006; transform:scale(0.96); }
+.dpad-btn {
+  width:64px; 
+  height:64px; 
+  border-radius:50%;
+  background: rgba(50,50,50,0.7); 
+  color:white; 
+  border:1px solid rgba(255,255,255,0.12);
+  font-size:22px; 
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+.dpad-btn:active { 
+  background:#a8ff4c; 
+  color:#052006; 
+  transform:scale(0.96); 
+}
 
 /* show dpad on small screens */
 @media (max-width: 900px) {
-  #dpad { display:block; }
-  #gameCanvas { height: calc(100vh - 140px); }
-  .menu-row { gap:10px; }
-  .menu-group { min-width:120px; }
-  .dpad-btn { width:54px; height:54px; font-size:20px; }
+  #dpad { 
+    display: block; 
+  }
+  #gameCanvas { 
+    height: calc(100vh - 140px); 
+  }
+  .menu-row { 
+    gap:10px; 
+  }
+  .menu-group { 
+    min-width:120px; 
+  }
+  .dpad-btn { 
+    width:54px; 
+    height:54px; 
+    font-size:20px; 
+  }
 }
 
 /* hide menu once game starts */
-.hidden { display:none !important; }
+.hidden { 
+  display:none !important; 
+}

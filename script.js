@@ -1,5 +1,3 @@
-/* Responsive Snake with correct scoring, growth, difficulty and dynamic speed escalation */
-
 /* Elements */
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -38,6 +36,7 @@ let highScore = 0;
 let intervalId = null;
 let currentMs = SPEED_MS.normal;  // actual tick speed
 let currentSpeedLevel = 'normal';
+let gameColors = { bg: '#000', snake: '#0f0', food: '#f00' };
 
 /* responsive canvas sizing */
 function resizeCanvas() {
@@ -82,7 +81,8 @@ function maybeStart() {
   if (themeChoice && wrapChoice !== null && diffChoice) {
     menu.classList.add('hidden');
     scoreboard.style.display = 'block';
-    document.getElementById('dpad').style.display = getComputedStyle(document.body).width ? '' : ''; // CSS controls visibility, keep DOM
+    canvas.style.display = 'block'; // Make canvas visible
+    document.getElementById('dpad').style.display = window.innerWidth <= 900 ? 'block' : 'none';
     startNewGame();
   }
 }
@@ -110,13 +110,15 @@ function placeFood() {
 function startNewGame() {
   resizeCanvas();
   // colors
-  let colors = { bg: '#000', snake: '#0f0', food: '#f00' };
-  if (themeChoice === 'classic') { colors = { bg: 'lightblue', snake: 'green', food: 'red' }; }
-  if (themeChoice === 'night')   { colors = { bg: 'black', snake: 'white', food: 'yellow' }; }
-  if (themeChoice === 'neon')    { colors = { bg: 'purple', snake: 'lime', food: 'cyan' }; }
-
-  // write them to local closure for draw function
-  window.__GAME_COLORS = colors;
+  if (themeChoice === 'classic') { 
+    gameColors = { bg: 'lightblue', snake: 'green', food: 'red' }; 
+  } else if (themeChoice === 'night') {   
+    gameColors = { bg: 'black', snake: 'white', food: 'yellow' }; 
+  } else if (themeChoice === 'neon') {    
+    gameColors = { bg: 'purple', snake: 'lime', food: 'cyan' }; 
+  } else {
+    gameColors = { bg: '#000', snake: '#0f0', food: '#f00' };
+  }
 
   // grid start
   cols = Math.floor(canvas.width / BOX);
@@ -150,11 +152,14 @@ function startNewGame() {
 
   // update scoreboard now
   updateScoreboard();
+  
+  // Draw initial scene
+  drawScene();
 }
 
 /* Update scoreboard display */
 function updateScoreboard() {
-  scoreboard.textContent = `Score: ${score * 10} | High Score: ${highScore * 10}`; // store base count as number of foods; display *10
+  scoreboard.textContent = `Score: ${score * 10} | High Score: ${highScore * 10}`;
 }
 
 /* Move + draw each tick */
@@ -245,17 +250,21 @@ function maybeEscalateSpeed() {
 /* draw background, food, snake and scoreboard */
 function drawScene() {
   // background
-  ctx.fillStyle = window.__GAME_COLORS.bg;
+  ctx.fillStyle = gameColors.bg;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // food
-  ctx.fillStyle = window.__GAME_COLORS.food;
+  ctx.fillStyle = gameColors.food;
   ctx.fillRect(food.x, food.y, BOX, BOX);
 
   // snake
   for (let i=0;i<snake.length;i++) {
-    ctx.fillStyle = i === 0 ? window.__GAME_COLORS.snake : '#ffffff';
+    ctx.fillStyle = gameColors.snake;
     ctx.fillRect(snake[i].x, snake[i].y, BOX, BOX);
+    
+    // Add border to snake segments for better visibility
+    ctx.strokeStyle = gameColors.bg;
+    ctx.strokeRect(snake[i].x, snake[i].y, BOX, BOX);
   }
 
   // update scoreboard text (show numeric points as 10*foods)
@@ -315,8 +324,5 @@ function attachControls() {
   };
 }
 
-/* expose a quick helper to avoid food spawn inside snake - used in placeFood already */
-
-/* Ensure canvas initially hidden until menu selection */
-canvas.style.display = 'none';
+// Initialize the page
 scoreboard.style.display = 'none';
