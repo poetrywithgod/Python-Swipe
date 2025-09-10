@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Python-Swipe Snake Game</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="menu">
-    <h1>🐍 Snake Game Setup</h1>
-    <div class="options">
-      <button class="theme-btn" data-theme="classic">Classic</button>
-      <button class="theme-btn" data-theme="night">Night</button>
-      <button class="theme-btn" data-theme="neon">Neon</button>
+    <h1>🐍 Python-Swipe Snake Game</h1>
+
+    <div class="menu-row">
+      <div class="menu-group">
+        <p>Choose Theme</p>
+        <div class="options">
+          <button class="theme-btn" data-theme="classic">Classic</button>
+          <button class="theme-btn" data-theme="night">Night</button>
+          <button class="theme-btn" data-theme="neon">Neon</button>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <p>Wrap Around?</p>
+        <div class="options">
+          <button class="wrap-btn" data-wrap="true">Wrap YES</button>
+          <button class="wrap-btn" data-wrap="false">Wrap NO</button>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <p>Difficulty</p>
+        <div class="options">
+          <button class="diff-btn" data-diff="easy">Easy</button>
+          <button class="diff-btn" data-diff="normal">Normal</button>
+          <button class="diff-btn" data-diff="hard">Hard</button>
+        </div>
+      </div>
     </div>
-    <div class="options">
-      <button class="wrap-btn" data-wrap="true">Wrap YES</button>
-      <button class="wrap-btn" data-wrap="false">Wrap NO</button>
-    </div>
+    <p class="hint">Pick options — the game will start automatically when all are chosen.</p>
   </div>
 
-  <canvas id="gameCanvas"></canvas>
-  <div id="scoreboard">Score: 0 | High Score: 0</div>
+  <canvas id="gameCanvas" aria-label="Snake game canvas"></canvas>
 
-  <!-- On-screen D-pad -->
-  <div id="dpad">
-    <button id="btn-up">⬆️</button>
+  <div id="scoreboard" aria-live="polite">Score: 0 | High Score: 0</div>
+
+  <!-- On-screen D-pad (mobile only via CSS media query) -->
+  <div id="dpad" aria-hidden="false">
+    <button id="btn-up" class="dpad-btn">⬆</button>
     <div class="dpad-row">
-      <button id="btn-left">⬅️</button>
-      <button id="btn-down">⬇️</button>
-      <button id="btn-right">➡️</button>
+      <button id="btn-left" class="dpad-btn">⬅</button>
+      <button id="btn-down" class="dpad-btn">⬇</button>
+      <button id="btn-right" class="dpad-btn">➡</button>
     </div>
   </div>
 
